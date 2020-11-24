@@ -11,4 +11,9 @@ public class HomeController {
     public String index() {
         return "This is the lending page!";
     }
+
+    @GetMapping("/home")
+    public String welcome(){
+        return "home";
+    }
 }
