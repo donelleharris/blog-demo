@@ -10,22 +10,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PostController {
     @GetMapping("/posts")
     @ResponseBody
-    public String post() {
+    public String index() {
         return "Posts index page";
     }
     @GetMapping("/posts/{id}")
     @ResponseBody
-    public String postById(@PathVariable int id) {
-        return "Post #" + id;
+    public String showIndividualPost(@PathVariable long id) {
+        return "Post Id#" + id;
     }
     @GetMapping("/posts/create")
     @ResponseBody
-    public String createPostFormView() {
+    public String showCreatePostForm() {
         return "view the form for creating a post";
     }
     @PostMapping("/posts/create")
     @ResponseBody
-    public String createPostFormPush() {
+    public String submitPost() {
         return "push a new post to the database";
     }
 }
