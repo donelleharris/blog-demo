@@ -1,22 +1,31 @@
 package com.donelle_harris.blog;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class PostController {
-    @GetMapping("/posts")
-    @ResponseBody
-    public String index() {
-        return "Posts index page";
+    @GetMapping("/posts/index")
+    public String index(Model model) {
+        List<String> posts = new ArrayList<>();
+        posts.add("This is the first post");
+        posts.add("This is the second post");
+        model.addAttribute("posts", posts);
+        return "/posts/index";
     }
-    @GetMapping("/posts/{id}")
-    @ResponseBody
-    public String showIndividualPost(@PathVariable long id) {
-        return "Post Id#" + id;
+    @GetMapping("/posts/show/{id}")
+    public String showIndividualPost(@PathVariable long id, Model model) {
+        Post post = new Post();
+        String title = "This is a title.";
+        String body = "This is the body of the post.";
+        model.addAttribute("id", "Post id#: " + id);
+        model.addAttribute("title", title);
+        model.addAttribute("body", body);
+        return "/posts/show";
     }
     @GetMapping("/posts/create")
     @ResponseBody
