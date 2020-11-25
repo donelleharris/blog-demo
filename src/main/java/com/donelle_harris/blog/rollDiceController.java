@@ -5,11 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.swing.plaf.IconUIResource;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class rollDiceController {
@@ -18,16 +14,21 @@ public class rollDiceController {
         return "roll-dice";
     }
 
-    @PostMapping("/roll-dice/{num}")
-    public String rollDice(@RequestParam(name = "dice") double num, Model model){
+    @PostMapping("/roll-dice")
+    public String rollDice(@RequestParam(name = "num") int num, Model model){
+        int rolledNumber = (int) (Math.random() * 6 + 1);
+        if(num == rolledNumber){
+            model.addAttribute("rolledNumber", rolledNumber);
+            model.addAttribute("num", num);
+            model.addAttribute("message1", "You chose: " + num + ". The die rolled: "+ rolledNumber);
+            model.addAttribute("message2", " You guessed correctly!");
+        } else if (num != rolledNumber){
+            model.addAttribute("rolledNumber", rolledNumber);
+            model.addAttribute("num", num);
+            model.addAttribute("message1", "You chose: " + num + ". The die rolled: "+ rolledNumber);
+            model.addAttribute("message2", "Your guess was not correct.");
+        }
 
-        int rolledNumber = (int) Math.random() * 6 + 1;
-        boolean guessedCorrectly = rolledNumber == num;
-
-        model.addAttribute("guessedCorrectly", guessedCorrectly);
-        model.addAttribute("rolledNumber", rolledNumber);
-        model.addAttribute("num", num);
-        return "/roll-dice";
-
+        return "roll-dice";
     }
 }
