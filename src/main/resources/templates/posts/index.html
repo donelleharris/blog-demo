@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Posts</title>
+    <div th:replace="partials/partials :: headPartial"></div>
+    <style>
+        #postList{
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="partials/partials :: nav"></nav>
+
+<div id="postList" class="container">
+    <ul>
+        <li th:each="name : ${posts}"><span th:text="${name}"></span></li>
+    </ul>
+</div>
+
+<div th:include="partials/partials :: footer"></div>
+<div th:include="partials/partials :: scripts"></div>
+</body>
+</html>

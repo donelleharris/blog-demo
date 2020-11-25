@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="partials/partials :: headPartial"></div>
+
+</head>
+<body>
+<nav th:replace="partials/partials :: nav"></nav>
+<center>
+    <h3>Welcome!</h3>
+    <div class="container w-25">
+        <br>
+        <div th:if="${num == null}">
+            <div class="row">
+                <p class="col">1</p>
+                <p class="col">2</p>
+                <p class="col">3</p>
+                <p class="col">4</p>
+                <p class="col">5</p>
+                <p class="col">6</p>
+            </div>
+            <br>
+            Please enter a number:
+            <form action="/roll-dice" method="post">
+                <input type="text" name="num" id="cohort-ip" class="field" />
+                <button>Roll the Die</button>
+            </form>
+        </div>
+    </div>
+</center>
+
+    <br>
+    <h5 class="text-center"><span th:text="${message1}"></span></h5>
+    <h3 class="text-center"><span th:text="${message2}"></span></h3>
+
+    <form th:if="${num != null}" action="/roll-dice" method="get" class="text-center">
+        <button>Try again</button>
+    </form>
+
+
+<div th:include="partials/partials :: footer"></div>
+<div th:include="partials/partials :: scripts"></div>
+</body>
+</html>
