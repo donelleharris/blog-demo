@@ -9,12 +9,19 @@ import java.util.List;
 
 @Controller
 public class PostController {
+    private final PostRepository postDao;
+
+    public PostController(PostRepository postDao){
+        this.postDao = postDao;
+    }
+
     @GetMapping("/posts/index")
     public String index(Model model) {
-        List<String> posts = new ArrayList<>();
-        posts.add("This is the first post");
-        posts.add("This is the second post");
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", postDao.findAll());
+//        List<String> posts = new ArrayList<>();
+//        posts.add("This is the first post");
+//        posts.add("This is the second post");
+//        model.addAttribute("posts", posts);
         return "/posts/index";
     }
     @GetMapping("/posts/show/{id}")
@@ -27,6 +34,7 @@ public class PostController {
         model.addAttribute("body", body);
         return "/posts/show";
     }
+
     @GetMapping("/posts/create")
     @ResponseBody
     public String showCreatePostForm() {
@@ -36,5 +44,32 @@ public class PostController {
     @ResponseBody
     public String submitPost() {
         return "push a new post to the database";
+    }
+
+    @GetMapping("/posts/edit/{id}")
+    @ResponseBody
+    public String showEditPostForm() {
+        return "view the form for editing a post";
+    }
+    @PostMapping("/posts/edit")
+    @ResponseBody
+    public String editPost() {
+        return "push a post edit to the database";
+    }
+
+    @GetMapping("/posts/delete/{id}")
+    @ResponseBody
+    public String  deletePost(long id){
+
+        return "/posts/delete";
+    }
+    @PostMapping("/posts/delete")
+    public String deletePost(@PathVariable long id, Model model){
+        //get the id of the post to be deleted and pass it to the deletePost() method
+        postDao.deleteById(id);
+        //return success message
+        model.addAttribute("message", ("Post # " + id + " deleted."));
+
+        return "/posts/delete";
     }
 }
