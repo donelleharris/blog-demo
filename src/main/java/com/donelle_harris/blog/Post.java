@@ -1,28 +1,33 @@
 package com.donelle_harris.blog;
 
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name="posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private long userId;
+    @Column(nullable = false, length = 100)
     private String title;
+    @Column(nullable = false)
     private String body;
-    private List<Category> categories;
-
-    public Post (long id, String title, String body){
-        this.id = id;
-        this.title = title;
-        this.body = body;
-    }
-    public Post (String title, String body){
-        this.title = title;
-        this.body = body;
-    }
 
     public Post() {
 
     }
+    public Post(long id, String title, String body) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+    }
+    public Post(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
 
     public long getId() {
         return id;
@@ -30,14 +35,6 @@ public class Post {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public String getTitle() {
@@ -55,14 +52,5 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
 
 }
