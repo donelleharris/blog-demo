@@ -9,23 +9,21 @@ import java.util.List;
 
 @Controller
 public class PostController {
-    @GetMapping("/posts/index")
+    @GetMapping("/posts")
     public String index(Model model) {
-        List<String> posts = new ArrayList<>();
-        posts.add("This is the first post");
-        posts.add("This is the second post");
+        List<Post> posts = new ArrayList<>();
+        posts.add(new Post("Post 1", "This is the first post"));
+        posts.add(new Post("Post 2", "This is the second post"));
+        posts.add(new Post("Post 3", "This is the third post"));
+
         model.addAttribute("posts", posts);
-        return "/posts/index";
+        return "posts/index";
     }
-    @GetMapping("/posts/show/{id}")
+    @GetMapping("/posts/{id}")
     public String showIndividualPost(@PathVariable long id, Model model) {
-        Post post = new Post();
-        String title = "This is a title.";
-        String body = "This is the body of the post.";
-        model.addAttribute("id", "Post id#: " + id);
-        model.addAttribute("title", title);
-        model.addAttribute("body", body);
-        return "/posts/show";
+        Post post = new Post("This is a title for post #" + id, "This is the body of the post.");
+        model.addAttribute("post", post);
+        return "posts/show";
     }
     @GetMapping("/posts/create")
     @ResponseBody
