@@ -54,13 +54,13 @@ public class PostController {
 
         return "/posts/delete";
     }
-    @PostMapping("/posts/delete")
-    public String deletePost(@PathVariable long id, Model model){
-        //get the id of the post to be deleted and pass it to the deletePost() method
-        postDao.deleteById(id);
-        //return success message
-        model.addAttribute("message", ("Post # " + id + " deleted."));
-
-        return "/posts/delete";
-    }
+//    @PostMapping("/posts/delete")
+//    public String deletePost(@PathVariable long id, Model model){
+//        //get the id of the post to be deleted and pass it to the deletePost() method
+//        postDao.deleteById(id);
+//        //return success message
+//        model.addAttribute("message", ("Post # " + id + " deleted."));
+//
+//        return "/posts/delete";
+//    }
 }
