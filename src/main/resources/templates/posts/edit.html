@@ -8,13 +8,13 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <div class="container">
     <div class="card">
-        <h3 th:text="${post.title}" name="title"></h3>
-        <p th:text="${post.body}" name="body"></p>
+        <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
+            <p th:text="${postToEdit.id}"></p>
+            <input type="text" th:value="${postToEdit.title}" name="title">
+            <input type="text" th:value="${postToEdit.body}" name="body">
+            <input type="submit" value="Update Post">
+        </form>
     </div>
-    <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
-    <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
-        <input type="submit" value="Delete Post">
-    </form>
 
 </div>
 
