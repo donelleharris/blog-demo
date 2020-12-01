@@ -7,13 +7,15 @@
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
 
-<div class="container">
-    <form th:action="@{/ads/create}" th:method="post">
+<div class="container text-center">
+    <form th:action="@{/posts/create}" th:method="post">
         Title:
-        <input name="title">
+        <input name="title"  class="w-100"/>
+        <br>
         Body:
-        <input name="body">
-        <input type="submit" value="submit post">
+        <input name="body"  class="w-100 h-100"/>
+        <br>
+        <input type="submit"  class="w-100"/>
     </form>
 </div>
 
