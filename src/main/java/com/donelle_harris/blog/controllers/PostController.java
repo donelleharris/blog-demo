@@ -1,5 +1,6 @@
-package com.donelle_harris.blog;
+package com.donelle_harris.blog.controllers;
 
+import com.donelle_harris.blog.Repos.PostRepository;
 import com.donelle_harris.blog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

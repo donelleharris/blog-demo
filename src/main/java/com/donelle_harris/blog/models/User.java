@@ -1,4 +1,4 @@
-package com.donelle_harris.blog;
+package com.donelle_harris.blog.models;
 
 import javax.persistence.*;
 
