@@ -2,6 +2,8 @@ package com.donelle_harris.blog;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +18,9 @@ public class User {
     private String lastName;
     @Column(nullable = false, length = 255)
     private String email;
-    @OneToMany
-    @JoinColumn (name = "post_id")
-    private Post post;
+//    @OneToMany
+//    @JoinColumn (name = "post_id")
+//    private Post post;
 
     public long getId() {
         return id;
@@ -68,11 +70,11 @@ public class User {
         this.email = email;
     }
 
-    public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }
+//    public Post getPost() {
+//        return post;
+//    }
+//
+//    public void setPost(Post post) {
+//        this.post = post;
+//    }
 }
