@@ -6,11 +6,18 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Welcome to the Codeup Blog!')"></header>
 
 <div class="container">
     <div class="card" th:each="post : ${posts}">
-        <h3 th:text="${post.title}"></h3>
-        <p th:text="${post.body}"></p>
+        <div class="card-body text-center">
+            <a th:href="@{'/posts/' + ${post.id}}">
+                <h5 class="card-title" th:text="${post.title}"></h5>
+                <hr style="width: 15em;">
+                <p class="card-subtitle mb-2 text-muted">Topic(s): </p>
+<!--                <p class="card-text"  th:text="${post.body}"></p>-->
+            </a>
+        </div>
     </div>
 </div>
 

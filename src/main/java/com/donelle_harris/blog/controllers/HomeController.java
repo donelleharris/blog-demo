@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
     @GetMapping("/")
-    @ResponseBody
     public String index() {
-        return "This is the lending page!";
+        return "/posts/index";
     }
 
     @GetMapping("/home")
     public String welcome(){
-        return "home";
+        return "/posts/index";
     }
 }

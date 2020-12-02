@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
+<head th:replace="partials/head :: head('All Posts')">
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>Index</title>
 </head>
 <body>
-    <h1>Welcome Home!</h1>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Welcome Home!')"></header>
 
+<!--<div class="container">-->
+<!--    <div class="card" th:each="post : ${posts}">-->
+<!--        <h3 th:text="${post.title}"></h3>-->
+<!--        <p th:text="${post.body}"></p>-->
+<!--    </div>-->
+<!--</div>-->
+
+<div th:include="partials/footer :: footer"></div>
+<div th:include="partials/scripts :: scripts"></div>
 </body>
 </html>

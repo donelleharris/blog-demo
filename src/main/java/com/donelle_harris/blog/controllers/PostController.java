@@ -40,7 +40,7 @@ public class PostController {
     ){
         Post post = new Post(title, body);
         postDao.save(post);
-        return "/posts/index";
+        return "redirect:/posts";
     }
 
     @GetMapping("/posts/{id}")

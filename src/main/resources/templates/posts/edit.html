@@ -6,6 +6,8 @@
 </head>
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Welcome to the Codeup Blog!')"></header>
+
 <div class="container">
     <div class="card">
         <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
