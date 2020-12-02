@@ -1,8 +1,18 @@
 package com.donelle_harris.blog;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="categories")
 public class Category {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Column(nullable = false, length = 100)
     private String name;
+//    @ManyToOne
+//    @JoinColumn (name = "post_category")
+//    private Post post;
 
     public Category(int id, String name) {
         this.id = id;
@@ -21,11 +31,9 @@ public class Category {
         this.name = name;
     }
 
+    @Id
     public long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
-    }
 }
