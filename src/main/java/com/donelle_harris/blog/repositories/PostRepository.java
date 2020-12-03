@@ -1,4 +1,4 @@
-package com.donelle_harris.blog.Repos;
+package com.donelle_harris.blog.repos;
 
 import com.donelle_harris.blog.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +8,6 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-
     Post findByTitle(String title); //select * from posts where title = ?
     Post findFirstByTitle(String title);//select * from posts where title = ? limit 1
     Post getPostById(long id);
