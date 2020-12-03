@@ -11,6 +11,7 @@
 <div class="container">
     <div class="card">
         <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
+<!--            <input type="hidden" th:value="${user.id}" name="userId">-->
             <p th:text="${postToEdit.id}"></p>
             <input type="text" th:value="${postToEdit.title}" name="title">
             <input type="text" th:value="${postToEdit.body}" name="body">

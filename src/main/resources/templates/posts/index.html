@@ -14,7 +14,7 @@
             <a th:href="@{'/posts/' + ${post.id}}">
                 <h5 class="card-title" th:text="${post.title}"></h5>
                 <hr style="width: 15em;">
-                <p class="card-subtitle mb-2 text-muted">Topic(s): </p>
+<!--                <p th:text="'Topics: ' + ${post.tags}" class="card-subtitle mb-2 text-muted"></p>-->
 <!--                <p class="card-text"  th:text="${post.body}"></p>-->
             </a>
         </div>

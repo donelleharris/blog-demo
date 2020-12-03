@@ -11,7 +11,8 @@
 <div class="container">
     <div class="card">
         <h3 th:text="${post.title}" name="title"></h3>
-        <p class="card-subtitle mb-2 text-muted">Topic(s): </p>
+        <p th:text="'Author: ' + ${post.user.getEmail()}" class="card-subtitle mb-2 text-muted"></p>
+<!--        <p th:text="'Topics: ' + ${post.tags}" class="text-muted"></p>-->
         <p th:text="${post.body}" name="body"></p>
     </div>
     <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
