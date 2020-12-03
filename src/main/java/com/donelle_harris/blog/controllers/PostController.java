@@ -1,6 +1,8 @@
 package com.donelle_harris.blog.controllers;
 
-import com.donelle_harris.blog.Repos.PostRepository;
+import com.donelle_harris.blog.models.User;
+import com.donelle_harris.blog.repositories.PostRepository;
+import com.donelle_harris.blog.repositories.UserRepository;
 import com.donelle_harris.blog.models.Post;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +14,10 @@ import java.util.List;
 public class PostController {
 
     private final PostRepository postDao;
-    public PostController(PostRepository postDao){
+    private final UserRepository userDao;
+    public PostController(PostRepository postDao, UserRepository userDao){
         this.postDao = postDao;
+        this.userDao = userDao;
     }
 
     @GetMapping("/posts")
@@ -38,7 +42,8 @@ public class PostController {
             @RequestParam(name = "title") String title,
             @RequestParam(name = "body") String body
     ){
-        Post post = new Post(title, body);
+        User user = userDao.getOne(1L);
+        Post post = new Post(user, title, body);
         postDao.save(post);
         return "redirect:/posts";
     }
@@ -69,7 +74,6 @@ public class PostController {
             @RequestParam(name = "body") String body,
             @PathVariable long id){
         Post post = new Post(id, title, body);
-        Post editedPost = postDao.save(post);
         postDao.save(post);
         return "redirect:/posts";
     }

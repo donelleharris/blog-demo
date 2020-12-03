@@ -1,4 +1,4 @@
-package com.donelle_harris.blog.repos;
+package com.donelle_harris.blog.repositories;
 
 import com.donelle_harris.blog.models.Post;
 import org.springframework.data.jpa.repository.JpaRepository;

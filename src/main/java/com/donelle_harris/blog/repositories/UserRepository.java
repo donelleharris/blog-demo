@@ -1,12 +1,11 @@
-package com.donelle_harris.blog.repos;
+package com.donelle_harris.blog.repositories;
 
-import com.donelle_harris.blog.models.Author;
+import com.donelle_harris.blog.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<Author, Long> {
-    Author findByUsername(String username);//select * from users where username = ?
-    Author findById(long id);//select * from users where id = ?
-
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);//select * from users where username = ?
+    User findById(long id);//select * from users where id = ?
 }
