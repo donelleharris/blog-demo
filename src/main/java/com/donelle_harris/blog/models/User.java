@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name="authors")
-public class Author {
+@Table(name="users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -20,11 +20,12 @@ public class Author {
     @Column(nullable = false, length = 255)
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> postList;
 
-    public Author() {}
-    public Author(long id, String username, String password, String firstName, String lastName, String email) {
+    public User() {}
+    //read
+    public User(long id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -32,7 +33,8 @@ public class Author {
         this.lastName = lastName;
         this.email = email;
     }
-    public Author(String username, String password, String firstName, String lastName, String email) {
+    //create
+    public User(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

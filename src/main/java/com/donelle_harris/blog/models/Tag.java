@@ -1,6 +1,7 @@
 package com.donelle_harris.blog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="tags")
@@ -10,19 +11,17 @@ public class Tag {
     private long id;
     @Column(nullable = false, length = 100)
     private String name;
-//    @ManyToOne
-//    @JoinColumn (name = "post_category")
-//    private Post post;
 
-    public Tag() {
+    @ManyToMany(mappedBy = "tags")
+    private List<Post> posts;
 
-}
-
+    public Tag() {}
+    //read
     public Tag(int id, String name) {
         this.id = id;
         this.name = name;
     }
-
+    //create
     public Tag(String name) {
         this.name= name;
     }
@@ -30,7 +29,6 @@ public class Tag {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -38,8 +36,14 @@ public class Tag {
     public String getName(){
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 }

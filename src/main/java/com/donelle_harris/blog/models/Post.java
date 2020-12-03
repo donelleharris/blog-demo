@@ -14,21 +14,34 @@ public class Post {
     private String title;
     @Column(nullable = false)
     private String body;
-//    @ManyToOne
-//    @JoinColumn (name = "post_id")
-//    private User user;
-//    @ManyToOne
-//    @JoinColumn (name = "post_category")
-//    private Category category;
+
+    @ManyToOne
+    private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "post_tags",
+            joinColumns = {@JoinColumn(name = "post_id")},
+            inverseJoinColumns = {@JoinColumn(name = "tag_id")}
+    )
+    private List<Tag> tags;
 
     public Post() {}
-
-    public Post(long id, String title, String body) {
+    //read
+    public Post(long id, User user, String title, String body) {
         this.id = id;
         this.title = title;
         this.body = body;
     }
-    public Post(String title, String body) {
+    //create
+    public Post(User user, String title, String body) {
+        this.user = user;
+        this.title = title;
+        this.body = body;
+    }
+    //update
+    public Post(long id, String title, String body) {
+        this.id = id;
         this.title = title;
         this.body = body;
     }
@@ -53,6 +66,20 @@ public class Post {
     }
     public void setBody(String body) {
         this.body = body;
+    }
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
 }
