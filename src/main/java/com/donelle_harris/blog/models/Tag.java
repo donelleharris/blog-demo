@@ -13,7 +13,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
-    private List<Post> posts;
+    private List<Post> postList;
 
     public Tag() {}
     //read
@@ -40,10 +40,11 @@ public class Tag {
         this.name = name;
     }
 
-    public List<Post> getPosts() {
-        return posts;
+    public List<Post> getPostList() {
+        return postList;
     }
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
     }
+
 }

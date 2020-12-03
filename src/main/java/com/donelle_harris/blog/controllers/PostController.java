@@ -2,6 +2,7 @@ package com.donelle_harris.blog.controllers;
 
 import com.donelle_harris.blog.models.User;
 import com.donelle_harris.blog.repositories.PostRepository;
+import com.donelle_harris.blog.repositories.TagRepository;
 import com.donelle_harris.blog.repositories.UserRepository;
 import com.donelle_harris.blog.models.Post;
 import org.springframework.stereotype.Controller;
@@ -15,9 +16,12 @@ public class PostController {
 
     private final PostRepository postDao;
     private final UserRepository userDao;
-    public PostController(PostRepository postDao, UserRepository userDao){
+    private final TagRepository tagDao;
+
+    public PostController(PostRepository postDao, UserRepository userDao, TagRepository tagDao){
         this.postDao = postDao;
         this.userDao = userDao;
+        this.tagDao = tagDao;
     }
 
     @GetMapping("/posts")

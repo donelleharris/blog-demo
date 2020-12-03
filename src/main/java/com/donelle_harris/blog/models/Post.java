@@ -12,7 +12,7 @@ public class Post {
     private long id;
     @Column(nullable = false, length = 100)
     private String title;
-    @Column(nullable = false)
+    @Column(nullable = false, MEDIUMTEXT)
     private String body;
 
     @ManyToOne
@@ -25,6 +25,9 @@ public class Post {
             inverseJoinColumns = {@JoinColumn(name = "tag_id")}
     )
     private List<Tag> tags;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<PostImage> images;
 
     public Post() {}
     //read
@@ -82,4 +85,10 @@ public class Post {
         this.tags = tags;
     }
 
+    public List<PostImage> getImages() {
+        return images;
+    }
+    public void setImages(List<PostImage> images) {
+        this.images = images;
+    }
 }
