@@ -1,7 +1,10 @@
-package com.donelle_harris.blog;
+package com.donelle_harris.blog.models;
 
 import javax.persistence.*;
+import java.util.List;
 
+@Entity
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +19,32 @@ public class User {
     private String lastName;
     @Column(nullable = false, length = 255)
     private String email;
-    @OneToMany
-    @JoinColumn (name = "post_id")
-    private Post post;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Post> postList;
+
+    public User() {}
+    //read
+    public User(long id, String username, String password, String firstName, String lastName, String email) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+    //create
+    public User(String username, String password, String firstName, String lastName, String email) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -31,7 +52,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -39,7 +59,6 @@ public class User {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -47,7 +66,6 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -55,7 +73,6 @@ public class User {
     public String getLastName() {
         return lastName;
     }
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
@@ -63,16 +80,14 @@ public class User {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Post getPost() {
-        return post;
+    public List<Post> getPostList() {
+        return postList;
     }
-
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
     }
 }
