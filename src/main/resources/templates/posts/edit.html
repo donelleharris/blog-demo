@@ -8,17 +8,20 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 
-<div class="container">
-    <div class="card">
+<div class="container" id="inputForm">
         <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
-            <p th:text="${postToEdit.id}"></p>
-            <p th:text="${postToEdit.user.getId()}" name="user_id"></p>
-            <input type="hidden" th:value="${postToEdit.user.getId()}" name="user_id">
-            <input type="text" th:value="${postToEdit.title}" name="title">
-            <input type="text" th:value="${postToEdit.body}" name="body">
+            <p th:text="'Post # ' + ${postToEdit.id} + '  Author: ' + ${postToEdit.user.getFirstName()} + ' ' + ${postToEdit.user.getLastName()}" name="user_info"></p>
+            <input type="hidden" th:field="${postToEdit.user}">
+            Title:
+            <input class="w-100" type="text" th:field="${postToEdit.title}" th:value="${postToEdit.title}" name="title">
+            <label for="body">Post:</label>
+            <textarea id="body" class="w-100 mh-100" th:field="${postToEdit.body}" th:text="${postToEdit.body}" name="body"></textarea>
+
+            <!--Checkboxes for tags-->
+
             <input type="submit" value="Update Post">
+
         </form>
-    </div>
 
 </div>
 

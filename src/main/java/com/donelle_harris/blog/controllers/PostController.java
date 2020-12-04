@@ -30,6 +30,7 @@ public class PostController {
         viewModel.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
+
     @GetMapping("/posts/search")
     public String search(@RequestParam(name = "term") String term, Model viewModel){
         term = "%"+term+"%";
@@ -42,6 +43,8 @@ public class PostController {
     public String showCreatePostForm(Model model) {
         model.addAttribute("user", userDao.getOne(2L));
         model.addAttribute("post", new Post());
+        List tagList = tagDao.findAll();
+        model.addAttribute("tagList", tagList);
         return "posts/create";
     }
     @PostMapping("/posts/create")
@@ -72,14 +75,8 @@ public class PostController {
         return "/posts/edit";
     }
     @PostMapping("/post/{id}/edit")
-    public String editPost (
-            @RequestParam(name = "user_id") Long userID,
-            @RequestParam(name = "title") String title,
-            @RequestParam(name = "body") String body,
-            @PathVariable long id){
-        User thisUser = userDao.getUserById(userID);
-        Post post = new Post(id, thisUser, title, body);
+    public String editPost (@ModelAttribute Post post){
         postDao.save(post);
-        return "redirect:/posts";
+        return "redirect:/posts/" + post.getId();
     }
 }

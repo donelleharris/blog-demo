@@ -8,17 +8,22 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 
-
-<div class="container text-center">
+<div class="container" id="inputForm">
     <p th:text="'Author: '+${user.firstName} +' '+ ${user.lastName}"></p>
     <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
         <input type="hidden" th:field="*{user}">
         Title:
         <input th:field="*{title}" class="w-100"/>
         <br />
-        Body:
-        <input th:field="*{body}" class="w-100"/>
+        Post:
+        <textarea class="w-100 mh-100" th:field="*{body}"></textarea>
         <br />
+        <!--Checkboxes for tags-->
+<!--        <h4>Select Tags: </h4>-->
+<!--        <div th:each="tag : ${tagList}" >-->
+<!--            <input type="checkbox" id="tags" name="tags" th:value="${tag}">-->
+<!--            <label for="tags" th:text="' ' + ${tag} + ' '"></label>-->
+<!--        </div>-->
         <input type="submit" class="w-100"/>
     </form>
 </div>
