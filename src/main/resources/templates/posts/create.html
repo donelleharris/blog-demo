@@ -10,14 +10,16 @@
 
 
 <div class="container text-center">
-    <form th:action="@{/posts/create}" th:method="post">
+    <p th:text="'Author: '+${user.firstName} +' '+ ${user.lastName}"></p>
+    <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
+        <input type="hidden" th:field="*{user}">
         Title:
-        <input name="title"  class="w-100"/>
-        <br>
+        <input th:field="*{title}" class="w-100"/>
+        <br />
         Body:
-        <input name="body"  class="w-100 h-100"/>
-        <br>
-        <input type="submit"  class="w-100"/>
+        <input th:field="*{body}" class="w-100"/>
+        <br />
+        <input type="submit" class="w-100"/>
     </form>
 </div>
 
