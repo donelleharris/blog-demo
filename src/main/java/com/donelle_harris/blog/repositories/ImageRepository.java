@@ -1,11 +1,10 @@
 package com.donelle_harris.blog.repositories;
 
-import com.donelle_harris.blog.models.Tag;
+import com.donelle_harris.blog.models.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TagRepository extends JpaRepository<Tag, Long> {
-    Tag findByName(String name);
+public interface ImageRepository extends JpaRepository<Image, Long> {
 
 }
