@@ -5,6 +5,9 @@ html {
 body {
     margin-bottom: 60px; /* Margin bottom by footer height */
 }
+ .headerImg{
+     background-image: url("../assets/wordle.png");
+ }
 #inputForm{
     min-height: 30em;
 }

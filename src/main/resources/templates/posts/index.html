@@ -15,7 +15,7 @@
                 <a th:href="@{'/posts/' + ${post.id}}">
                     <h5 class="card-title" th:text="${post.title}"></h5>
                 </a>
-                    <hr style="width: 15em;">
+                    <hr>
                     <p class="text-muted">Tags:
                         <span th:each="tag : ${post.tags}">
                             <span th:text="${tag.name} + ', '"></span>

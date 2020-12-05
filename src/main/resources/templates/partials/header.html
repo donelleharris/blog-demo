@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .jumbotron{
+            background-image: url("../assets/wordle.png");
+        }
+    </style>
 </head>
 <body>
-    <header th:fragment="header(text)" class="jumbotron">
+    <header th:fragment="header(text)" class="jumbotron background:url('../images/wordle.png');">
         <h1 class="text-center" th:text="${text}"></h1>
     </header>
 </body>
