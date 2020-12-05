@@ -27,7 +27,7 @@ public class Post {
     private List<Tag> tags;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<PostImage> images;
+    private List<Image> images;
 
     public Post() {}
     //read
@@ -85,10 +85,10 @@ public class Post {
         this.tags = tags;
     }
 
-    public List<PostImage> getImages() {
+    public List<Image> getImages() {
         return images;
     }
-    public void setImages(List<PostImage> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 }

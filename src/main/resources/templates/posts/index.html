@@ -8,22 +8,23 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 
-<div class="container">
-    <div class="card" th:each="post : ${posts}">
-        <div class="card-body text-center">
-            <a th:href="@{'/posts/' + ${post.id}}">
-                <h5 class="card-title" th:text="${post.title}"></h5>
-            </a>
-                <hr style="width: 15em;">
-                Tags: <span th:each="tag : ${post.tags}">
-                    <span th:text="'   ' + ${tag.name}" class="text-muted"></span>
-                </span>
-
-
+<main class="container">
+    <div class="row d-flex flex-wrap align-content-between">
+        <div class="card col-4 border-solid-black my-2" th:each="post : ${posts}">
+            <div class="card-body text-center">
+                <a th:href="@{'/posts/' + ${post.id}}">
+                    <h5 class="card-title" th:text="${post.title}"></h5>
+                </a>
+                    <hr>
+                    <p class="text-muted">Tags:
+                        <span th:each="tag : ${post.tags}">
+                            <span th:text="${tag.name} + ', '"></span>
+                        </span>
+                    </p>
+            </div>
         </div>
     </div>
-</div>
-
+</main>
 <div th:include="partials/footer :: footer"></div>
 <div th:include="partials/scripts :: scripts"></div>
 </body>

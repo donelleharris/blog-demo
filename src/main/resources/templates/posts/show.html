@@ -12,7 +12,11 @@
     <div class="card">
         <h3 th:text="${post.title}" name="title"></h3>
         <p th:text="'Author: ' + ${post.user.getEmail()}" class="card-subtitle mb-2 text-muted"></p>
-        <p th:text="'Topics: ' + ${post.tags}" class="text-muted"></p>
+        <p class="text-muted">Tags:
+            <span th:each="tag : ${post.tags}">
+                            <span th:text="${tag.name} + ', '"></span>
+                        </span>
+        </p>
         <p th:text="${post.body}" name="body"></p>
     </div>
     <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
