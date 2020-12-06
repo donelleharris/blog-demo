@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/head :: head('Sign Up')">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Sign Up')"></header>
+
+<div class="container" id="inputForm">
+    <h4>Create an account:</h4>
+    <form th:action="@{/sign-up}" th:method="post" th:object="${user}">
+        <div class="col s12">
+            <div class="col s6">
+                <label for="firstName">First Name:</label>
+                <input id="firstName" type="text" th:field="*{firstName}" name="firstname">
+                <br />
+            </div>
+            <div class="col s6">
+                <label for="lastName">Last Name:</label>
+                <input id="lastName" type="text" th:field="*{lastName}" name="lastname">
+                <br />
+            </div>
+        </div>
+        <div class="col s12">
+            <label for="email">Email:</label>
+            <input id="email" type="text" th:field="*{email}" name="email">
+            <br />
+        </div>
+        <label for="username">Username:</label>
+        <input id="username" class="col s12" type="text" th:field="*{username}" name="username">
+        <br />
+
+        <label for="password">Password:</label>
+        <input id="password" class="col s12" type="text" th:field="*{password}" name="password">
+        <br />
+        <label for="password-confirm">Confirm Password:</label>
+        <input id="password-confirm" class="col s12" type="text" name="password-confirm">
+        <br />
+        <input type="submit" class="col s12" value="Sign Up"/>
+    </form>
+</div>
+
+<div th:include="partials/footer :: footer"></div>
+<div th:include="partials/scripts :: scripts"></div>
+</body>
+</html>
