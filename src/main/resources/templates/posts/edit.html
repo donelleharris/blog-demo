@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('Post')">
     <meta charset="UTF-8">
     <title>Post</title>
@@ -7,24 +8,24 @@
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
+<main>
+    <div class="container" id="inputForm">
+            <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
+                <p th:text="'Post # ' + ${postToEdit.id} + '  Author: ' + ${postToEdit.user.getFirstName()} + ' ' + ${postToEdit.user.getLastName()}" name="user_info"></p>
+                <input type="hidden" th:field="${postToEdit.user}">
+                Title:
+                <input class="w-100" type="text" th:field="${postToEdit.title}" th:value="${postToEdit.title}" name="title">
+                <label for="body">Post:</label>
+                <textarea id="body" class="w-100 mh-100" th:field="${postToEdit.body}" th:text="${postToEdit.body}" name="body"></textarea>
 
-<div class="container" id="inputForm">
-        <form th:action="@{'/post/' + ${postToEdit.id} +'/edit'}" th:method="post">
-            <p th:text="'Post # ' + ${postToEdit.id} + '  Author: ' + ${postToEdit.user.getFirstName()} + ' ' + ${postToEdit.user.getLastName()}" name="user_info"></p>
-            <input type="hidden" th:field="${postToEdit.user}">
-            Title:
-            <input class="w-100" type="text" th:field="${postToEdit.title}" th:value="${postToEdit.title}" name="title">
-            <label for="body">Post:</label>
-            <textarea id="body" class="w-100 mh-100" th:field="${postToEdit.body}" th:text="${postToEdit.body}" name="body"></textarea>
+                <!--Checkboxes for tags-->
 
-            <!--Checkboxes for tags-->
+                <input type="submit" value="Update Post">
 
-            <input type="submit" value="Update Post">
+            </form>
 
-        </form>
-
-</div>
-
+    </div>
+</main>
 <div th:include="partials/footer :: footer"></div>
 <div th:include="partials/scripts :: scripts"></div>
 </body>

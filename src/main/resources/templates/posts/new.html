@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('New Post')">
     <meta charset="UTF-8">
     <title>Index</title>
@@ -8,19 +9,19 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 
-
-<div class="container text-center">
-    <form th:action="@{/posts/create}" th:method="post">
-        Title:
-        <input name="title"  class="w-100"/>
-        <br>
-        Body:
-        <input name="body"  class="w-100 h-100"/>
-        <br>
-        <input type="submit"  class="w-100"/>
-    </form>
-</div>
-
+<main>
+    <div class="container text-center">
+        <form th:action="@{/posts/create}" th:method="post">
+            Title:
+            <input name="title"  class="w-100"/>
+            <br>
+            Body:
+            <input name="body"  class="w-100 h-100"/>
+            <br>
+            <input type="submit"  class="w-100"/>
+        </form>
+    </div>
+</main>
 <div th:include="partials/footer :: footer"></div>
 <div th:include="partials/scripts :: scripts"></div>
 </body>

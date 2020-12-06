@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('Post')">
     <meta charset="UTF-8">
     <title>Post</title>
@@ -7,24 +8,24 @@
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
-
-<div class="container">
-    <div class="card">
-        <h3 th:text="${post.title}" name="title"></h3>
-        <p th:text="'Author: ' + ${post.user.getEmail()}" class="card-subtitle mb-2 text-muted"></p>
-        <p class="text-muted">Tags:
-            <span th:each="tag : ${post.tags}">
-                            <span th:text="${tag.name} + ', '"></span>
-                        </span>
-        </p>
-        <p th:text="${post.body}" name="body"></p>
+<main>
+    <div class="container">
+        <div class="card">
+            <h3 th:text="${post.title}" name="title"></h3>
+            <p th:text="'Author: ' + ${post.user.getEmail()}" class="card-subtitle mb-2 text-muted"></p>
+            <p class="text-muted">Tags:
+                <span th:each="tag : ${post.tags}">
+                                <span th:text="${tag.name} + ', '"></span>
+                            </span>
+            </p>
+            <p th:text="${post.body}" name="body"></p>
+        </div>
+        <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
+        <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
+            <input type="submit" value="Delete Post">
+        </form>
     </div>
-    <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
-    <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
-        <input type="submit" value="Delete Post">
-    </form>
-</div>
-
+</main>
 <div th:include="partials/footer :: footer"></div>
 <div th:include="partials/scripts :: scripts"></div>
 </body>
