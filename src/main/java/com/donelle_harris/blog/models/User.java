@@ -11,30 +11,31 @@ public class User {
     private long id;
     @Column(nullable = false, length = 24)
     private String username;
-    @Column(nullable = false, length = 24)
+    @Column(nullable = false, length = 24, unique = true)
     private String password;
     @Column(nullable = false, length = 100)
     private String firstName;
     @Column(nullable = false, length = 100)
     private String lastName;
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 255, unique = true)
     private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> postList;
 
     public User() {}
-    //read
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+        firstName = copy.firstName;
+        lastName = copy.lastName;
+    }
+
     public User(long id, String username, String password, String firstName, String lastName, String email) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
-    //create
-    public User(String username, String password, String firstName, String lastName, String email) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

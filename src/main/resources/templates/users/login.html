@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="partials/head :: head('Login')">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: nav"></nav>
+<header th:replace="partials/header :: header('Login')"></header>
+<main>
+    <div class="container" id="inputForm">
+        <h4>Log in:</h4>
+        <div th:if="${param.error}">
+            Invalid Username and Password.
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <form class="col 6" th:action="@{/login}" th:method="post">
+
+            <label for="username">Username:</label>
+            <input id="username" class="w-100" name="username" type="text">
+            <br />
+
+            <label for="password">Password:</label>
+            <input id="password" class="w-100" name="password" type="password">
+            <br />
+
+            <input type="submit" value="Log In" class="w-100"/>
+        </form>
+    </div>
+</main>
+<div th:include="partials/footer :: footer"></div>
+<div th:include="partials/scripts :: scripts"></div>
+</body>
+</html>

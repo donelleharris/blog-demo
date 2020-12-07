@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="partials/head :: head('All Posts')">
     <meta charset="UTF-8">
     <title>Index</title>
@@ -8,18 +9,28 @@
 <body>
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!!')"></header>
+<main>
+    <div class="container">
+        <h4>The Latest Ipsum!</h4>
+        <div class = "iris">
+            <div class = "card transparent z-depth-5">
 
-<div class="container">
-    <h2>The Latest Ipsum!</h2>
-    <div class="card">
-        <div class="card-body">
-                <h5 class="card-title" th:text="${post.title}"></h5>
-                <hr>
-                <p th:text="${post.body}"></p>
+                <div class="card-body p-2">
+                    <h5 class="card-title" th:text="${post.title}"></h5>
+                    <hr>
+                    <p th:text="${post.body}"></p>
+                </div>
+            </div>
         </div>
+    <!--    <div class="card">-->
+    <!--        <div class="card-body">-->
+    <!--                <h5 class="card-title" th:text="${post.title}"></h5>-->
+    <!--                <hr>-->
+    <!--                <p th:text="${post.body}"></p>-->
+    <!--        </div>-->
+    <!--    </div>-->
     </div>
-</div>
-
+</main>
 <div th:include="partials/footer :: footer"></div>
 <div th:include="partials/scripts :: scripts"></div>
 </body>
