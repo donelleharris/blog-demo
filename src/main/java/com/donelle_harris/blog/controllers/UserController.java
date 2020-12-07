@@ -47,7 +47,7 @@ public class UserController {
     public String showUserProfile(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(user.getUsername());
-        model.addAttribute("userPosts", postDao.findAllByUser(user));
+        model.addAttribute("posts", postDao.findAllByUser(user));
         System.out.println(postDao.findAllByUser(user));
         return "users/profile";
     }
