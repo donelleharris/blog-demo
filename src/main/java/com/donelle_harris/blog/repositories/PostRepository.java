@@ -1,6 +1,7 @@
 package com.donelle_harris.blog.repositories;
 
 import com.donelle_harris.blog.models.Post;
+import com.donelle_harris.blog.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post deleteById(long id);
     Post deleteByTitle(String title);
     List<Post> findAllByTitleIsLike(String term);
+    List<Post> findAllByUser(User user);
 }

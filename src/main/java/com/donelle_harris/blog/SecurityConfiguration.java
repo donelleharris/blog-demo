@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/ads")
+                .defaultSuccessUrl("/posts")
                 .permitAll()
 
                 .and()
@@ -45,14 +45,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/ads")
+                .antMatchers("/", "/posts")
                 .permitAll()
 
                 .and()
                 .authorizeRequests()
                 .antMatchers(
-                        "/ads/create",
-                        "/ads/{id}/edit"
+                        "/posts/create",
+                        "/posts/{id}/edit",
+                        "/user/{id}",
+                        "/user/{id}/edit"
                 )
                 .authenticated()
         ;

@@ -3,7 +3,6 @@ package com.donelle_harris.blog.services;
 import com.donelle_harris.blog.models.User;
 import com.donelle_harris.blog.models.UserWithRoles;
 import com.donelle_harris.blog.repositories.UsersRepository;
-import com.donelle_harris.blog.repositories.UsersRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
