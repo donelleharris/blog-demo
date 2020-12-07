@@ -1,8 +1,10 @@
 package com.donelle_harris.blog.controllers;
 
 import com.donelle_harris.blog.models.User;
+import com.donelle_harris.blog.repositories.PostRepository;
 import com.donelle_harris.blog.repositories.UserRepository;
 import com.donelle_harris.blog.repositories.UsersRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,16 +15,13 @@ public class UserController {
     private final UserRepository userDao;
     private UsersRepository users;
     private PasswordEncoder passwordEncoder;
+    private PostRepository postDao;
 
-    public UserController(UserRepository userDao, UsersRepository users, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userDao, UsersRepository users, PasswordEncoder passwordEncoder, PostRepository postDao) {
         this.userDao = userDao;
         this.users = users;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "users/login";
+        this.postDao = postDao;
     }
 
     @GetMapping("/logout")
@@ -38,15 +37,30 @@ public class UserController {
     }
 
     @PostMapping("/sign-up")
-    public String saveUser(@ModelAttribute User user,
-                           @RequestParam (name = "password") String password,
-                           @RequestParam (name = "password-confirm") String passwordConfirm) {
-        if (password.equals(passwordConfirm)) {
-            String hash = passwordEncoder.encode(user.getPassword());
-            user.setPassword(hash);
-            users.save(user);
-            return "redirect:users/login";
-        } else return "users/sign-up";
+    public String saveUser(@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+        users.save(user);
+        return "redirect:/login";
+    }
+    @GetMapping("/profile")
+    public String showUserProfile(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.getUsername());
+        model.addAttribute("userPosts", postDao.findAllByUser(user));
+        System.out.println(postDao.findAllByUser(user));
+        return "users/profile";
+    }
 
+    @GetMapping("/user/{id}/edit")
+    public String updateUser(@PathVariable(value = "id") Long id, Model model){
+        model.addAttribute("userToEdit", userDao.getUserById(id));
+        return "users/edit";
+    }
+
+    @PostMapping("/user/{id}/edit")
+    public String editPost (@ModelAttribute User user){
+        userDao.save(user);
+        return "redirect:/user/" + user.getId();
     }
 }

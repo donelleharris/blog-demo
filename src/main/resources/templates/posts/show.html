@@ -20,10 +20,10 @@
             </p>
             <p th:text="${post.body}" name="body"></p>
         </div>
-        <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
-        <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
-            <input type="submit" value="Delete Post">
-        </form>
+<!--        <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>-->
+<!--        <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">-->
+<!--            <input type="submit" value="Delete Post">-->
+<!--        </form>-->
     </div>
 </main>
 <div th:include="partials/footer :: footer"></div>

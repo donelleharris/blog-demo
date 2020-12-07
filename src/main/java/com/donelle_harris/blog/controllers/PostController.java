@@ -7,6 +7,7 @@ import com.donelle_harris.blog.repositories.TagRepository;
 import com.donelle_harris.blog.repositories.UserRepository;
 import com.donelle_harris.blog.models.Post;
 import com.donelle_harris.blog.services.EmailService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -38,8 +39,8 @@ public class PostController {
 
 
     @GetMapping("/posts")
-    public String index(Model viewModel) {
-        viewModel.addAttribute("posts", postDao.findAll());
+    public String index(Model model) {
+        model.addAttribute("posts", postDao.findAll());
         return "posts/index";
     }
 
@@ -62,7 +63,7 @@ public class PostController {
     }
     @PostMapping("/posts/create")
     public String submitPost(@ModelAttribute Post newPost ){
-        User user = userDao.getOne(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         newPost.setUser(user);
         postDao.save(newPost);
         emailService.prepareAndSend(newPost, "Your post has been created ",
@@ -91,6 +92,7 @@ public class PostController {
     }
     @PostMapping("/post/{id}/edit")
     public String editPost (@ModelAttribute Post post){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postDao.save(post);
         return "redirect:/posts/" + post.getId();
     }

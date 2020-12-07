@@ -10,8 +10,8 @@
 <header th:replace="partials/header :: header('Sign Up')"></header>
 
 <div class="container" id="inputForm">
-    <h4>Create an account:</h4>
-    <form th:action="@{/sign-up}" method="POST" th:object="${user}">
+    <h4>Update User:</h4>
+    <form th:action="@{/users/{id}/edit}" method="POST" th:object="${user}">
         <div class="">
             <div class="w-100">
                 <label for="firstName">First Name:</label>
