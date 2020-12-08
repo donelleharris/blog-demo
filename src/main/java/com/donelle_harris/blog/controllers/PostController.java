@@ -92,7 +92,6 @@ public class PostController {
     }
     @PostMapping("/post/{id}/edit")
     public String editPost (@ModelAttribute Post post){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         postDao.save(post);
         return "redirect:/posts/" + post.getId();
     }

@@ -10,20 +10,21 @@
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 <main>
     <div class="container">
+        <a href="/posts"><-- Back to All Posts</a>
         <div class="card">
             <h3 th:text="${post.title}" name="title"></h3>
-            <p th:text="'Author: ' + ${post.user.getEmail()}" class="card-subtitle mb-2 text-muted"></p>
+            <p th:text="'Author: ' + ${post.user.getUsername()}" class="card-subtitle mb-2 text-muted"></p>
             <p class="text-muted">Tags:
-                <span th:each="tag : ${post.tags}">
-                                <span th:text="${tag.name} + ', '"></span>
-                            </span>
+                <span th:each="tag : ${post.tags}"> <span th:text="${tag.name} + ', '"></span> </span>
             </p>
             <p th:text="${post.body}" name="body"></p>
         </div>
-<!--        <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>-->
-<!--        <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">-->
-<!--            <input type="submit" value="Delete Post">-->
-<!--        </form>-->
+        <div sec:authorize="isAuthenticated()">
+            <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
+            <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
+                <input type="submit" value="Delete Post">
+            </form>
+        </div>
     </div>
 </main>
 <div th:include="partials/footer :: footer"></div>

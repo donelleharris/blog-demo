@@ -10,28 +10,29 @@
 <nav th:replace="partials/navbar :: nav"></nav>
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 <main class="container">
-    <div sec:authorize="isAuthenticated()">
+    <div class="container p-2" sec:authorize="isAuthenticated()">
         <p>Profile Information</p>
         <p>User: <span th:text="${#authentication.principal.firstName}"></span> <span th:text="${#authentication.principal.lastName}"></span></p>
         <p>User ID: <span th:text="${#authentication.principal.id}"/></p>
         <p>Username: <span th:text="${#authentication.principal.username}"/></p>
         <p>Email: <span th:text="${#authentication.principal.email}"/></p>
+        <button><a th:href="@{'/user/' + ${#authentication.principal.id} + '/edit'}">Update Profile</a></button>
     </div>
-    <div class="container">
-        <div >
-            <div class="card" th:each="post : ${posts}">
-                <h3 th:text="${post.title}" name="title"></h3>
-                <p class="text-muted">Tags:
+    <div class="container p-2">
+            <div class="card p-2" th:each="post : ${posts}">
+                <h3 class=" ml-1" th:text="${post.title}" name="title"></h3>
+                <p class=" ml-1" th:text="${post.id}"></p>
+                <p class="text-muted ml-1">Tags:
                     <span th:each="tag : ${post.tags}"> <span th:text="${tag.name} + ', '"></span> </span>
                 </p>
-                <p th:text="${post.body}" name="body"></p>
-
+                <p class=" ml-1" th:text="${post.body}" name="body"></p>
+                <div class="row ml-1">
+                    <a th:href="'/post/' + ${post.id} + '/edit'"><button class="btn btn-outline-dark">Edit Post</button></a>
+                    <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
+                        <input class="btn btn-outline-dark" type="submit" value="Delete Post">
+                    </form>
+                </div>
             </div>
-        <button><a th:href="@{'/post/' + ${post.id} +'/edit'}">Edit Post</a></button>
-        <form th:action="@{'/post/' + ${post.id} +'/delete'}" method="post">
-            <input type="submit" value="Delete Post">
-        </form>
-        </div>
     </div>
 
 </main>
