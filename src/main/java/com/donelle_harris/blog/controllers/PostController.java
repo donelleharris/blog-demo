@@ -44,11 +44,11 @@ public class PostController {
         return "posts/index";
     }
 
-    @GetMapping("/posts/search")
+    @GetMapping("/search")
     public String search(@RequestParam(name = "term") String term, Model viewModel){
         term = "%"+term+"%";
-        List posts = postDao.findAllByTitleIsLike(term);
-        viewModel.addAttribute("posts", posts);
+        List searchPosts = postDao.findAllByTitleIsLike(term);
+        viewModel.addAttribute("posts", searchPosts);
         return "/posts/index";
     }
 
