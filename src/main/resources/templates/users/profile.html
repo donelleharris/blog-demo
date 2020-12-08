@@ -12,10 +12,10 @@
 <main class="container">
     <div class="container p-2" sec:authorize="isAuthenticated()">
         <p>Profile Information</p>
-        <p>User: <span th:text="${#authentication.principal.firstName}"></span> <span th:text="${#authentication.principal.lastName}"></span></p>
-        <p>User ID: <span th:text="${#authentication.principal.id}"/></p>
-        <p>Username: <span th:text="${#authentication.principal.username}"/></p>
-        <p>Email: <span th:text="${#authentication.principal.email}"/></p>
+        <p>User: <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></p>
+        <p>User ID: <span th:text="${user.id}"/></p>
+        <p>Username: <span th:text="${user.username}"/></p>
+        <p>Email: <span th:text="${user.email}"/></p>
         <button><a th:href="@{'/user/' + ${#authentication.principal.id} + '/edit'}">Update Profile</a></button>
     </div>
     <div class="container p-2">

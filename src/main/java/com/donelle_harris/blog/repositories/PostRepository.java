@@ -16,6 +16,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Post deleteByTitle(String title);
     List<Post> findAllByTitleIsLike(String term);
     List<Post> findAllByUser(User user);
-    List<Post> deleteAllByUserId(Long id);//delete * from posts where user_id = ?
-
+    List<Post> deleteAllByUserId(Long id);//delete from posts where user_id = ?
+    void deletePostsByUser(User user);
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
@@ -49,7 +50,7 @@ public class UserController {
     @GetMapping("/profile")
     public String showUserProfile(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user.getUsername());
+        model.addAttribute("user", userDao.getUserById(user.getId()));
         model.addAttribute("posts", postDao.findAllByUser(user));
         System.out.println(postDao.findAllByUser(user));
         return "users/profile";
@@ -69,8 +70,11 @@ public class UserController {
         return "redirect:/profile";
     }
     @PostMapping("/user/{id}/delete")
-    public String deletePost (@ModelAttribute User userToDelete){
-        postDao.deleteAllByUserId(userToDelete.getId());
+    @Transactional
+    public String deletePost (){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userToDelete = userDao.getOne(user.getId());
+        postDao.deletePostsByUser(userToDelete);
         userDao.delete(userToDelete);
         return "redirect:/posts";
     }
