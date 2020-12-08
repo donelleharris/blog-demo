@@ -44,10 +44,10 @@
     </form>
     <br />
     <br />
-    <p class="text-danger">Delete account is permanent</p>
-    <form th:action="@{'/user/' + ${#authentication.principal.id} +'/delete'}" method="POST">
-        <input type="submit" value="Delete User Account">
-    </form>
+<!--    <p class="text-danger">Delete account is permanent</p>-->
+<!--    <form th:action="@{'/user/' + ${userToDelete.id} +'/delete'}" method="POST" th:object="${user}">-->
+<!--        <input type="submit" value="Delete User Account">-->
+<!--    </form>-->
 
 </div>
 

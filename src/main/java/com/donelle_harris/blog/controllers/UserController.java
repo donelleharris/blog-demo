@@ -1,5 +1,6 @@
 package com.donelle_harris.blog.controllers;
 
+import com.donelle_harris.blog.models.Post;
 import com.donelle_harris.blog.models.User;
 import com.donelle_harris.blog.repositories.PostRepository;
 import com.donelle_harris.blog.repositories.UserRepository;
@@ -9,6 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -67,7 +70,7 @@ public class UserController {
     }
     @PostMapping("/user/{id}/delete")
     public String deletePost (@ModelAttribute User userToDelete){
-
+        postDao.deleteAllByUserId(userToDelete.getId());
         userDao.delete(userToDelete);
         return "redirect:/posts";
     }
