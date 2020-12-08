@@ -10,7 +10,7 @@
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 
 <main class="container">
-
+    <h3 th:if="${posts.isEmpty()}">No Posts Found</h3>
     <div class="row d-flex flex-wrap align-content-between">
         <div class="card col-4 my-2" th:each="post : ${posts}">
             <div class="card-body text-center">
