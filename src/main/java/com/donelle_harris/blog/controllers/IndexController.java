@@ -31,7 +31,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/index")
     public String welcome(Model model){
         List postList = postDao.findAll();
         int lastPostIndex = postList.size()-1;
