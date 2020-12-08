@@ -12,7 +12,7 @@
 <div class="container" id="inputForm">
     <h4>Create an account:</h4>
     <form th:action="@{/sign-up}" method="POST" th:object="${user}">
-        <div class="">
+
             <div class="w-100">
                 <label for="firstName">First Name:</label>
                 <input class="w-50" id="firstName" type="text" th:field="*{firstName}">
@@ -21,7 +21,7 @@
                 <input class="w-50" id="lastName" type="text" th:field="*{lastName}">
                 <br />
             </div>
-        </div>
+
         <div class="w-100">
             <label for="email">Email:</label>
             <input class="w-50" id="email" type="text" th:field="*{email}">

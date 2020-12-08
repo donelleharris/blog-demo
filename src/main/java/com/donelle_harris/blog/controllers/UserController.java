@@ -47,20 +47,28 @@ public class UserController {
     public String showUserProfile(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         System.out.println(user.getUsername());
-        model.addAttribute("userPosts", postDao.findAllByUser(user));
+        model.addAttribute("posts", postDao.findAllByUser(user));
         System.out.println(postDao.findAllByUser(user));
         return "users/profile";
     }
 
-    @GetMapping("/user/{id}/edit")
-    public String updateUser(@PathVariable(value = "id") Long id, Model model){
+    @GetMapping("user/{id}/edit")
+    public String editUser(@PathVariable(value = "id") long id, Model model){
         model.addAttribute("userToEdit", userDao.getUserById(id));
         return "users/edit";
     }
 
-    @PostMapping("/user/{id}/edit")
-    public String editPost (@ModelAttribute User user){
+    @PostMapping("user/{id}/edit")
+    public String editUser (@ModelAttribute User user){
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
         userDao.save(user);
-        return "redirect:/user/" + user.getId();
+        return "redirect:/profile";
+    }
+    @PostMapping("/user/{id}/delete")
+    public String deletePost (@ModelAttribute User userToDelete){
+
+        userDao.delete(userToDelete);
+        return "redirect:/posts";
     }
 }

@@ -36,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/posts")
+                .defaultSuccessUrl("/")
                 .permitAll()
 
                 .and()
@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/posts/create",
                         "/posts/{id}/edit",
-                        "/user/{id}",
+                        "/profile",
                         "/user/{id}/edit"
                 )
                 .authenticated()
