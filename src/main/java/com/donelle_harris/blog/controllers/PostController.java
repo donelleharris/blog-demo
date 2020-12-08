@@ -49,7 +49,7 @@ public class PostController {
         term = "%"+term+"%";
         List searchPosts = postDao.findAllByTitleIsLike(term);
         viewModel.addAttribute("posts", searchPosts);
-        return "/posts/index";
+        return "posts/index";
     }
 
     @GetMapping("/posts/create")
