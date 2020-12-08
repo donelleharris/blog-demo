@@ -7,17 +7,16 @@ import com.donelle_harris.blog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
-public class HomeController {
+public class IndexController {
     private final PostRepository postDao;
     private final UserRepository userDao;
     private final TagRepository tagDao;
 
-    public HomeController(PostRepository postDao, UserRepository userDao, TagRepository tagDao){
+    public IndexController(PostRepository postDao, UserRepository userDao, TagRepository tagDao){
         this.postDao = postDao;
         this.userDao = userDao;
         this.tagDao = tagDao;
@@ -29,7 +28,7 @@ public class HomeController {
         int lastPostIndex = postList.size()-1;
         Post lastPost = (Post) postList.get(lastPostIndex);
         model.addAttribute("post", lastPost);
-        return "/home";
+        return "index";
     }
 
     @GetMapping("/home")
@@ -38,6 +37,6 @@ public class HomeController {
         int lastPostIndex = postList.size()-1;
         Post lastPost = (Post) postList.get(lastPostIndex);
         model.addAttribute("post", lastPost);
-        return "/home";
+        return "index";
     }
 }
