@@ -65,4 +65,10 @@ public class UserController {
         userDao.save(user);
         return "redirect:/profile";
     }
+    @PostMapping("/user/{id}/delete")
+    public String deletePost (@ModelAttribute User userToDelete){
+
+        userDao.delete(userToDelete);
+        return "redirect:/posts";
+    }
 }

@@ -12,7 +12,7 @@
 <div class="container" id="inputForm" sec:authorize="isAuthenticated()">
     <h4>Update User:</h4>
     <form th:action="@{'/user/' + ${userToEdit.id} +'/edit'}" method="POST" th:object="${user}">
-        <input type="text" th:field="${userToEdit.id}" th:value="${#authentication.principal.id}" name="userId">
+        <input type="text" th:field="${userToEdit.id}" th:value="${userToEdit.id}" name="userId">
             <div class="w-100">
                 <p>User: <span th:text="${userToEdit.firstName}"></span> <span th:text="${userToEdit.lastName}"></span></p>
                 <label for="firstName">First Name:</label>
@@ -41,6 +41,12 @@
             <br />
         </div>
         <input type="submit" value="Update"/>
+    </form>
+    <br />
+    <br />
+    <p class="text-danger">Delete account is permanent</p>
+    <form th:action="@{'/user/' + ${#authentication.principal.id} +'/delete'}" method="POST">
+        <input type="submit" value="Delete User Account">
     </form>
 
 </div>
