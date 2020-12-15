@@ -13,7 +13,7 @@ main {
 }
 
 .iris {
-    background-image: url("../assets/wordle.jpeg");
+    background-image: url(../../templates/assets/wordle.jpeg);
     background-repeat: no-repeat;
     height: 100vh;
     background-size: cover;

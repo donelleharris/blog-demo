@@ -10,8 +10,10 @@ import com.donelle_harris.blog.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -54,7 +56,6 @@ public class PostController {
 
     @GetMapping("/posts/create")
     public String showCreatePostForm(Model model) {
-        model.addAttribute("user", userDao.getOne(2L));
         model.addAttribute("post", new Post());
 
         List tagList = tagDao.findAll();
@@ -62,13 +63,23 @@ public class PostController {
         return "posts/create";
     }
     @PostMapping("/posts/create")
-    public String submitPost(@ModelAttribute Post newPost ){
+    public String submitPost(
+            @Valid Post post,
+            Errors validation,
+            Model model,
+            @ModelAttribute Post newPost ){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        newPost.setUser(user);
-        postDao.save(newPost);
-        emailService.prepareAndSend(newPost, "Your post has been created ",
-                "Your post: '" + newPost.getTitle() + "' has been posted on the Ipsum Blog.");
-        return "redirect:/posts";
+        if (validation.hasErrors()) {
+            model.addAttribute("errors", validation);
+            model.addAttribute("post", newPost);
+            return "posts/create";
+        } else {
+            newPost.setUser(user);
+            postDao.save(newPost);
+            emailService.prepareAndSend(newPost, "Your post has been created ",
+                    "Your post: '" + newPost.getTitle() + "' has been posted on the Ipsum Blog.");
+            return "redirect:/posts";
+        }
     }
 
     @GetMapping("/posts/{id}")

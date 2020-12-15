@@ -10,14 +10,15 @@
 <header th:replace="partials/header :: header('Welcome to the Ipsum Blog!')"></header>
 <main>
     <div class="container" id="inputForm">
-        <p th:text="'Author: '+${user.firstName} +' '+ ${user.lastName}"></p>
         <form th:action="@{/posts/create}" th:method="post" th:object="${post}">
             <input type="hidden" th:field="*{user}">
-            <h4>Title:</h4>
-            <input th:field="*{title}" class="w-100" name="title"/>
+            <label for="title"><h4>Title:</h4></label>
+            <input th:field="*{title}" name="title" id="title" class="w-100" />
+            <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
             <br />
-            <h4>Post:</h4>
-            <textarea class="w-100 mh-100" th:field="*{body}" name="body"></textarea>
+            <label for="body"><h4>Post:</h4></label>
+            <textarea th:field="*{body}" name="body" id="body" class="w-100" ></textarea>
+            <p th:if="${#fields.hasErrors('body')}" th:errors="*{body}" />
             <br />
             <!--Checkboxes for tags-->
             <h4>Select Tags: </h4>

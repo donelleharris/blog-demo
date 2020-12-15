@@ -1,6 +1,5 @@
 package com.donelle_harris.blog.controllers;
 
-import com.donelle_harris.blog.models.Post;
 import com.donelle_harris.blog.models.User;
 import com.donelle_harris.blog.repositories.PostRepository;
 import com.donelle_harris.blog.repositories.UserRepository;
